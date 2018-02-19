@@ -7,12 +7,13 @@
 //
 
 #import "MasterViewController.h"
+#import "CakeViewModel.h"
 #import "CakeCell.h"
 #import "Cake.h"
 
 @interface MasterViewController ()
 
-@property (strong, nonatomic) NSMutableArray <Cake *>*cakes;
+@property (strong, nonatomic) CakeViewModel *cakeViewModel;
 
 @end
 
@@ -29,13 +30,15 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.cakes.count;
+    NSInteger numberOfRowsInSection = [self.cakeViewModel numberOfCakes];
+    
+    return numberOfRowsInSection;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CakeCell *cell = (CakeCell*)[tableView dequeueReusableCellWithIdentifier:@"CakeCell"];
     
-    Cake *cake = self.cakes[indexPath.row];
+    Cake *cake = [self.cakeViewModel cakeAtIndexPath:indexPath];
     
     [cell configureWithCake:cake];
     
@@ -48,10 +51,9 @@
 
 - (void)getData{
   
-    NSURL *url = [NSURL URLWithString:@"https://gist.githubusercontent.com/hart88/198f29ec5114a3ec3460/raw/8dd19a88f9b8d24c23d9960f3300d0c917a4f07c/cake.json"];
+    NSURL *url = [CakeViewModel cakesURL];
     
     __block NSArray *objects;
-    
   
     NSURLSessionDataTask *downloadTask = [[NSURLSession sharedSession]
                                           dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -63,14 +65,8 @@
                                               if (!jsonError){
                                                   objects = responseData;
                                                   
-                                                  self.cakes = [[NSMutableArray alloc] initWithCapacity:objects.count];
-                                                  
-                                                  for (NSDictionary *dictionary in objects) {
-                                                      Cake *cake = [[Cake alloc] initWithDictionary:dictionary];
-                                                      [self.cakes addObject:cake];
-                                                  }
-                                                  
-                                                  
+                                                  self.cakeViewModel = [[CakeViewModel alloc] initWithDictionaryObjects:objects];
+                                               
                                                   dispatch_async(dispatch_get_main_queue(), ^{
                                                       [self.tableView reloadData];
                                                   });

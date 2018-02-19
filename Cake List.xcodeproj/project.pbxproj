@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6D4A36C1203AE9C0003E37CA /* Cake.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A36C0203AE9C0003E37CA /* Cake.m */; };
+		6D4A36C5203AFBC1003E37CA /* CakeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A36C4203AFBC1003E37CA /* CakeViewModel.m */; };
 		DBF17A171B0B648F004E6311 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF17A161B0B648F004E6311 /* main.m */; };
 		DBF17A1A1B0B648F004E6311 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF17A191B0B648F004E6311 /* AppDelegate.m */; };
 		DBF17A1D1B0B648F004E6311 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF17A1C1B0B648F004E6311 /* MasterViewController.m */; };
@@ -31,6 +32,8 @@
 /* Begin PBXFileReference section */
 		6D4A36BF203AE9C0003E37CA /* Cake.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cake.h; sourceTree = "<group>"; };
 		6D4A36C0203AE9C0003E37CA /* Cake.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Cake.m; sourceTree = "<group>"; };
+		6D4A36C3203AFBC1003E37CA /* CakeViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CakeViewModel.h; sourceTree = "<group>"; };
+		6D4A36C4203AFBC1003E37CA /* CakeViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CakeViewModel.m; sourceTree = "<group>"; };
 		DBF17A111B0B648F004E6311 /* Cake List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cake List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBF17A151B0B648F004E6311 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBF17A161B0B648F004E6311 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -75,6 +78,15 @@
 			name = Objects;
 			sourceTree = "<group>";
 		};
+		6D4A36C6203AFBCB003E37CA /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				6D4A36C3203AFBC1003E37CA /* CakeViewModel.h */,
+				6D4A36C4203AFBC1003E37CA /* CakeViewModel.m */,
+			);
+			name = ViewModels;
+			sourceTree = "<group>";
+		};
 		DBF17A081B0B648F004E6311 = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +117,7 @@
 				DBF17A261B0B648F004E6311 /* LaunchScreen.xib */,
 				DBF17A141B0B648F004E6311 /* Supporting Files */,
 				6D4A36C2203AE9CA003E37CA /* Objects */,
+				6D4A36C6203AFBCB003E37CA /* ViewModels */,
 			);
 			path = "Cake List";
 			sourceTree = "<group>";
@@ -255,6 +268,7 @@
 			files = (
 				6D4A36C1203AE9C0003E37CA /* Cake.m in Sources */,
 				DBF17A1A1B0B648F004E6311 /* AppDelegate.m in Sources */,
+				6D4A36C5203AFBC1003E37CA /* CakeViewModel.m in Sources */,
 				DBF17A3F1B0B8E16004E6311 /* CakeCell.m in Sources */,
 				DBF17A1D1B0B648F004E6311 /* MasterViewController.m in Sources */,
 				DBF17A171B0B648F004E6311 /* main.m in Sources */,
