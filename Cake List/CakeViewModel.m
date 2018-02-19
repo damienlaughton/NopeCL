@@ -23,19 +23,11 @@
     return cakesURL;
 }
 
-- (instancetype)initWithDictionaryObjects:(NSArray <NSDictionary *>*)objects;
+- (instancetype)initWithDelegate:(id<CakeViewModelDelegate>)delegate;
 {
-    if (self == [super init])
-    {
-        self.cakes = [[NSMutableArray alloc] initWithCapacity:objects.count];
-        
-        for (NSDictionary *dictionary in objects) {
-            Cake *cake = [[Cake alloc] initWithDictionary:dictionary];
-            if (cake)
-            {
-                [self.cakes addObject:cake];
-            }
-        }
+    if (self == [super init]) {
+        self.delegate = delegate;
+        [self fetchCakes];
     }
     
     return self;
@@ -51,6 +43,48 @@
     Cake *cake = self.cakes[indexPath.row];
     
     return cake;
+}
+
+// Get ALL the cake
+
+- (void)fetchCakes;
+{
+    NSURL *url = [CakeViewModel cakesURL];
+    
+    __block NSArray *objects;
+    
+    NSURLSessionDataTask *downloadTask = [[NSURLSession sharedSession]
+                                          dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                              NSError *jsonError;
+                                              id responseData = [NSJSONSerialization
+                                                                 JSONObjectWithData:data
+                                                                 options:kNilOptions
+                                                                 error:&jsonError];
+                                              if (!jsonError){
+                                                  objects = responseData;
+                                                  
+                                                  self.cakes = [[NSMutableArray alloc] initWithCapacity:objects.count];
+                                                  
+                                                  for (NSDictionary *dictionary in objects) {
+                                                      Cake *cake = [[Cake alloc] initWithDictionary:dictionary];
+                                                      if (cake)
+                                                      {
+                                                          [self.cakes addObject:cake];
+                                                      }
+                                                  }
+                                                  
+                                                  if ([self.delegate respondsToSelector:@selector(cakeViewModelUpdated)]) {
+                                                      dispatch_async(dispatch_get_main_queue(), ^{
+                                                          [self.delegate cakeViewModelUpdated];
+                                                      });
+                                                  }
+                                                  
+                                              } else {
+                                              }
+                                          }];
+    
+    
+    [downloadTask resume];
 }
 
 @end

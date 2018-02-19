@@ -7,7 +7,7 @@
 //
 
 #import "MasterViewController.h"
-#import "CakeViewModel.h"
+
 #import "CakeCell.h"
 #import "Cake.h"
 
@@ -21,7 +21,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self getData];
+    
+    self.cakeViewModel = [[CakeViewModel alloc] initWithDelegate:self];
 }
 
 #pragma mark - Table View
@@ -49,34 +50,13 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (void)getData{
-  
-    NSURL *url = [CakeViewModel cakesURL];
-    
-    __block NSArray *objects;
-  
-    NSURLSessionDataTask *downloadTask = [[NSURLSession sharedSession]
-                                          dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                              NSError *jsonError;
-                                              id responseData = [NSJSONSerialization
-                                                                 JSONObjectWithData:data
-                                                                 options:kNilOptions
-                                                                 error:&jsonError];
-                                              if (!jsonError){
-                                                  objects = responseData;
-                                                  
-                                                  self.cakeViewModel = [[CakeViewModel alloc] initWithDictionaryObjects:objects];
-                                               
-                                                  dispatch_async(dispatch_get_main_queue(), ^{
-                                                      [self.tableView reloadData];
-                                                  });
-                                                  
-                                              } else {
-                                              }
-                                          }];
-  
-  
-    [downloadTask resume];
+// CakeViewModelDelegate Method(s)
+
+- (void)cakeViewModelUpdated;
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
 }
 
 @end

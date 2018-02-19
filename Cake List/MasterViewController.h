@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CakeViewModel.h"
 
-@interface MasterViewController : UITableViewController
-
+@interface MasterViewController : UITableViewController <CakeViewModelDelegate>
 
 @end
 

@@ -9,11 +9,19 @@
 #import <Foundation/Foundation.h>
 #import "Cake.h"
 
+@protocol CakeViewModelDelegate <NSObject>
+
+- (void)cakeViewModelUpdated;
+
+@end
+
 @interface CakeViewModel : NSObject
+
+@property (weak, nonatomic) id<CakeViewModelDelegate> delegate;
 
 + (NSURL *)cakesURL;
 
-- (instancetype)initWithDictionaryObjects:(NSArray <NSDictionary *>*)objects;
+- (instancetype)initWithDelegate:(id<CakeViewModelDelegate>)delegate;
 
 - (NSInteger)numberOfCakes;
 
