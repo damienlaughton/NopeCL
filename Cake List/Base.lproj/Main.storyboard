@@ -76,9 +76,9 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="cakeImageView" destination="2cJ-YH-PLb" id="s4S-u2-MjR"/>
-                                    <outlet property="descriptionLabel" destination="XAL-IQ-xUk" id="ooK-Ho-ea2"/>
-                                    <outlet property="titleLabel" destination="pLQ-Hv-eeT" id="VuR-pl-Yb7"/>
+                                    <outlet property="cakeImageView" destination="2cJ-YH-PLb" id="tR5-8T-Bjv"/>
+                                    <outlet property="descriptionLabel" destination="XAL-IQ-xUk" id="Yau-cL-duA"/>
+                                    <outlet property="titleLabel" destination="pLQ-Hv-eeT" id="X7i-Gz-ia3"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

@@ -10,5 +10,11 @@
 
 @implementation CakeCell
 
+- (void)configureWithCake:(Cake *)cake;
+{
+    self.titleLabel.text = cake.cakeName;
+    self.descriptionLabel.text = cake.cakeDescription;
+    self.cakeImageView.image = cake.cakeImage;
+}
 
 @end
