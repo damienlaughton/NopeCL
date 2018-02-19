@@ -45,6 +45,11 @@
     return cake;
 }
 
+- (void)refreshRequest;
+{
+    [self fetchCakes];
+}
+
 // Get ALL the cake
 
 - (void)fetchCakes;
@@ -63,15 +68,19 @@
                                               if (!jsonError){
                                                   objects = responseData;
                                                   
-                                                  self.cakes = [[NSMutableArray alloc] initWithCapacity:objects.count];
+                                                  NSMutableArray <Cake *>*newCakes =
+                                                  
+                                                   [[NSMutableArray alloc] initWithCapacity:objects.count];
                                                   
                                                   for (NSDictionary *dictionary in objects) {
                                                       Cake *cake = [[Cake alloc] initWithDictionary:dictionary];
                                                       if (cake)
                                                       {
-                                                          [self.cakes addObject:cake];
+                                                          [newCakes addObject:cake];
                                                       }
                                                   }
+                                                  
+                                                  self.cakes = newCakes;
                                                   
                                                   if ([self.delegate respondsToSelector:@selector(cakeViewModelUpdated)]) {
                                                       dispatch_async(dispatch_get_main_queue(), ^{

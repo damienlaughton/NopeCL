@@ -50,11 +50,17 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+- (IBAction)refreshPulled:(id)sender;
+{
+    [self.cakeViewModel refreshRequest];
+}
+
 // CakeViewModelDelegate Method(s)
 
 - (void)cakeViewModelUpdated;
 {
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self.refreshControl endRefreshing];
         [self.tableView reloadData];
     });
 }

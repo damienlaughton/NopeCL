@@ -27,4 +27,6 @@
 
 - (Cake *)cakeAtIndexPath:(NSIndexPath *)indexPath;
 
+- (void)refreshRequest;
+
 @end
